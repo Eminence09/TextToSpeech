@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More About RoboSpeaker
+    </title>
+    <style>
+        :root {
+            --x: 0;
+            ---y: 0;
+            --xp: 0;
+            --yp: 0;
+            --hue: calc(0 + (var(--xp) * 500));
+            --bg: hsl(0 0% 10%);
+            --size: 100px;
+            --glow: radial-gradient(50% 50% at center,
+                    hsl(var(--hue) 80% 85%),
+                    hsl(var(--hue) 80% 70%),
+                    transparent) calc((var(--x) * 1px) - (var(--size) * 0.5)) calc((var(--y) * 1px) - (var(--size) * 0.5)) / var(--size) var(--size) no-repeat fixed;
+
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000;
+        }
+
+
+        .flip-card {
+            background-color: transparent;
+            width: 300px;
+            height: 400px;
+            perspective: 2000px;
+        }
+
+        .flip-card-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40vw;
+            height: 140%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        /* .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        } */
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 14px;
+        }
+
+        .flip-card-front {
+            background-color: #1f1f1f;
+            color: white;
+            position: absolute;
+            top: 0%;
+            width: 40vw;
+            display: flex;
+            align-items: center;
+        }
+
+        .flip-card-back {
+            background: #0a0a0a;
+            color: white;
+            transform: rotateY(180deg);
+            /* width: 40vw; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #flip-card2 {
+            position: relative;
+            left: 38vw;
+        }
+
+        .box-cont {
+            display: flex;
+            flex-direction: row;
+        }
+
+
+        .btn-cont {
+            position: absolute;
+            bottom: 15%;
+            left: 25%;
+            width: 55vw;
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .btn1 {
+
+            position: absolute;
+            left: -7%;
+            color: wheat;
+        }
+
+        .btn2 {
+
+            position: absolute;
+            left: 79%;
+            color: wheat;
+        }
+
+
+
+
+        button {
+            border-radius: 1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 0.1ch;
+            border: 4px solid transparent;
+            box-shadow: 0 1px hsl(0 0% 100% / 0.1s) inset;
+            cursor: pointer;
+            background: linear-gradient(var(--bg), var(--bg)) padding-box, var(--glow), linear-gradient(black, black) border-box;
+            transition: back-size 0.24s;
+            touch-action: none;
+            position: relative;
+            padding: 1rem 2rem;
+
+        }
+
+        button::before {
+            content: "";
+            position: relative;
+            inset: 0;
+            box-shadow: 0 1px hsl(0 0% 100% / 0.15) inset;
+            background: var(--bg);
+            z-index: 2;
+            border-radius: 1rem;
+        }
+
+        button span {
+            background: var(--glow), black;
+            background-clip: text;
+            color: transparent;
+            height: 100%;
+            width: 100%;
+            z-index: 2;
+            position: relative;
+            z-index: 0;
+
+        }
+
+        :root:has(button:active) {
+            --size: 300px;
+
+        }
+
+        button::after {
+            content: "";
+            position: absolute;
+            inset: -4px;
+            filter: blur(20px);
+            border: 4px solid transparent;
+            background: var(--glow);
+            border-radius: 1rem;
+        }
+
+        .card-text {
+            height: 200px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-text p {
+            font-size: 2rem;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        .impl-btn {
+            background: whitesmoke;
+            position: relative;
+            bottom: -20vh;
+            border-radius: 7px;
+            padding: 12px;
+            font-size: 23px;
+            text-decoration: none;
+            color: black;
+            font-family: 'circular';
+            border: 3px solid black;
+        }
+
+        .impl-btn:hover {
+            transform: scale(1.05);
+            transition: transform .1s .1s ease-in-out;
+            border-color: #282828;
+
+        }
+
+        .d-code {
+            background: #282828;
+            height: 250px;
+            position: relative;
+            top: 125px;
+            overflow: auto;
+
+        }
+
+        pre {
+            color: orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box-cont">
+        <div class="flip-card">
+            <div class="flip-card-inner" id="flip-card1">
+                <div class="flip-card-front">
+                    <div class="card-text">
+                        <p>RoboSpeaker is a Python Script crafted for Windows Users. It employs the pyttsx3 library
+                            to
+                            convert text input into speech output. It allows users to
+                            seamlessly transform text messages into spoken words. enhacing accessibility and
+                            convenience.</p>
+                    </div>
+                </div>
+                <div class="flip-card-back">
+                    <!-- wrte  someting -->
+
+                </div>
+            </div>
+        </div>
+        <form action="card2" method="post"> {% csrf_token %}
+
+            <div class="flip-card">
+                <div class="flip-card-inner" id="flip-card2">
+                    <div class="flip-card-front">
+                        <div class="card-text">
+                            <p>Some text about robospeaker in programmin that creaetd with <code
+                                    style="color: darkred;">Python</code>.</p>
+                        </div>
+
+                    </div>
+                    <div class="flip-card-back">
+                        <!-- wrte  someting -->
+
+                        <div class="d-code">
+                            <code>
+                                <pre>
+import os
+    import pyttsx3
+    engine = pyttsx3.init()
+    try:
+        if __name__ == '__main__':
+            print("welcome to RoboSpeaker.... Developed by sougata ")
+            while True:
+                x= input("enter what you want me to speak : ")
+                if x == ";":
+                    engine.say("bye bye friends hope you enjoyed using it ")
+                    engine.runAndWait()
+                                                         break
+                engine.say(x)
+                engine.runAndWait()
+    except Exception as d:
+        print("there is a error occured",d)
+                                </pre>
+                            </code>
+                        </div>
+                        <button class="impl-btn" type="submit">Implement Code</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <footer>
+            <div class="btn-cont">
+                <button class="btn1" onclick="flip()">
+                    <marquee behavior="none" direction="left"><span style="color: silver;">Learn More</span>
+                    </marquee>
+                </button>
+                <button class="btn2" onclick="flip2()">
+                    <marquee behavior="none" direction="left"><span style="color: silver;">Dive Into</span>
+                    </marquee>
+                </button>
+            </div>
+        </footer>
+    </div>
+    <script>
+        const syncPointer = ({ x: pointerX, y: pointerY }) => {
+            const x = pointerX.toFixed(2);
+            const y = pointerY.toFixed(2);
+            const xp = (pointerX / window.innerWidth).toFixed(2);
+            const yp = (pointerY / window.innerHeight).toFixed(2);
+            document.documentElement.style.setProperty("--x", x);
+            document.documentElement.style.setProperty("--xp", xp);
+            document.documentElement.style.setProperty("--y", y);
+            document.documentElement.style.setProperty("--yp", yp);
+        };
+
+        document.body.addEventListener("pointermove", syncPointer);
+
+        function flip() {
+            document.getElementById("flip-card1").style.transform = "rotateY(180deg)";
+            document.getElementById("flip-card1").style.transitionDelay = "1s";
+            document.getElementById("flip-card1").style.transitionDuration = ".3s";
+
+        }
+        function flip2() {
+            document.getElementById("flip-card2").style.transform = "rotateY(180deg)";
+            document.getElementById("flip-card2").style.transitionDelay = "1s";
+            document.getElementById("flip-card2").style.transitionDuration = ".3s";
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

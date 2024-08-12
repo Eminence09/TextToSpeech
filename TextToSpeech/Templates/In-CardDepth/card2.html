@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Execute Snippet</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web-speech-api/1.0.0/speechSynthesis.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        body {
+            background: #0e0e0e;
+
+        }
+
+        .container {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        #user-cont {
+            height: 60vh;
+            width: 50vw;
+            background: #242424;
+            position: relative;
+            top: 14%;
+            left: 25%;
+            border-radius: 25px;
+        }
+
+        input {
+            position: sticky;
+            left: 30%;
+            height: 70px;
+            top: 80%;
+            min-width: 40vw;
+            width: 40vw;
+            border-radius: 18px;
+            background-color: #000;
+            color: white;
+            font-size: 20px;
+            margin-top: 50px;
+            padding-left: 30px;
+            border: 2px solid whitesmoke;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        button {
+            width: 49px;
+            height: 15px;
+            position: absolute;
+            top: 9%;
+            background: #131313;
+            right: 29%;
+            border-radius: 214px;
+            font-size: 6px;
+            transform: scale(3.5);
+            border: 2px solid gray;
+            color: white;
+        }
+
+        button:hover {
+            cursor: pointer;
+            transform: scale(3.2);
+        }
+
+        #user-cont p {
+            padding-left: 83px;
+            text-transform: uppercase;
+            font-size: 30px;
+            color: brown;
+            font-family: 'Times New Roman', Times, serif;
+            margin-top: 60px;
+        }
+
+        .container a {
+            position: absolute;
+            top: 10%;
+            right: 12vw;
+            font-size: 25px;
+            text-decoration: none;
+            font-size: 7px;
+            color: white;
+        }
+
+        .progress {
+            background-color: red;
+            height: 3px;
+            animation: load 1s ease-in-out 1;
+            position: fixed;
+        }
+
+        @keyframes load {
+            0% {
+                width: 0;
+            }
+
+            50% {
+                width: 40vw;
+            }
+
+            75% {
+                width: 75vw;
+
+            }
+
+            100% {
+                width: 100vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="progress"></div>
+    </header>
+
+    <form action="{% url 'speak' %}" method="post"> {% csrf_token %}
+        <div class="container">
+            <button class="back-btn" type="submit"><a href="Templates\index2.html">Back</a></button>
+            <div id="user-cont">
+                <p id="user-text">Your Text Will be display here...</p>
+            </div>
+            <input type="text" name="userinput" id="userinput" placeholder="Enter text here.">
+            <button id="btn-value" onclick="getValue()">Process</button>
+
+        </div>
+    </form>
+    <script>
+        function getValue() {
+            // Get the input element by its ID  
+            let inputField = document.getElementById("userinput");
+
+            // Get the value of the input field 
+            let value = inputField.value;
+
+            // Display the value in an alert 
+            const d_text = document.getElementById("user-text")
+            d_text.innerHTML = value
+        }
+
+    </script>
+</body>
+
+</html>
